@@ -26,7 +26,7 @@ variable "traineeDisplayName" {
 
 # Azure storage account variables
 variable "storageAccountName" {
-    default = "stg-acc-01"
+    default = "strg-acc-01"
 }
 
 variable "storageAccountTier" {
