@@ -1,8 +1,3 @@
-# AWS user variables
-variable "users" {
-    default = ["Cody", "Ibrahim", "Ali", "Heesung"]
-}
-
 # Azure Resource group variables
 variable "RGname" {
     default = "RG01"
@@ -40,6 +35,11 @@ variable "storageAccountTier" {
 
 variable "storageAccountReplicationType" {
     default = "GRS"
+}
+
+# AWS user variables
+variable "users" {
+    default = ["Cody", "Ibrahim", "Ali", "Heesung"]
 }
 
 # AWS Bucket Variables
