@@ -33,15 +33,17 @@ resource "aws_s3_bucket" "b" {
 }
 
 # Creates the azure storage account
-resource "azurerm_storage_account" "stg-acc" {
+resource "azurerm_storage_account" "stg_acc" {
   name                     = "${var.storageAccountName}"
   resource_group_name      = azurerm_resource_group.RG01.name
   location                 = azurerm_resource_group.RG01.location
-  account_tier             = "Standard"
-  account_replication_type = "GRS"
+  account_tier             = "${var.storageAccountTier}"
+  account_replication_type = "${var.storageAccountReplicationType}"
+
   tags = {
-    environment = "staging"
+    environment = "test"
   }
+  depends_on = [aws_iam_user.new_user]
 }
 
 # Creates a linux virtual machine in Azure
