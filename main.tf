@@ -8,12 +8,6 @@ resource "azurerm_resource_group" "RG01" {
 }
 
 
-# Creates the trainee in azure
-resource "azuread_user" "trainee" {
-  user_principal_name = "${var.traineeUserPrincipal}"
-  display_name        = "${var.traineeDisplayName}"
-}
-
 
 # Creates the trainer in azure and requires them to change password during the next login
 resource "azuread_user" "trainer" {
@@ -21,6 +15,14 @@ resource "azuread_user" "trainer" {
   display_name        = "${var.trainerDisplayName}"
   force_password_change = "true"
 }
+
+
+# Creates the trainee in azure
+resource "azuread_user" "trainee" {
+  user_principal_name = "${var.traineeUserPrincipal}"
+  display_name        = "${var.traineeDisplayName}"
+}
+
 
 
 # Creates the S3 buckets
