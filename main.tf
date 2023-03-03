@@ -1,6 +1,6 @@
 # Creates the azure resource group
 resource "azurerm_resource_group" "RG01" {
-  name     = "${var.RGname}"
+  name = "${var.RGname}"
   location = "${var.location}"
   tags = {
     source = "terraform"

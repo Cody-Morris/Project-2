@@ -1,7 +1,9 @@
+# AWS user variables
 variable "users" {
     default = ["Cody", "Ibrahim", "Ali", "Heesung"]
 }
 
+# Azure Resource group variables
 variable "location" {
     default = "West Europe"
 }
