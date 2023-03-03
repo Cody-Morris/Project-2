@@ -4,29 +4,29 @@ variable "users" {
 }
 
 # Azure Resource group variables
-variable "location" {
-    default = "West Europe"
-}
-
 variable "RGname" {
     default = "RG01"
 }
 
+variable "location" {
+    default = "West Europe"
+}
+
 # Azure User variables
-variable "traineeUserPrincipal" {
-    default = "codymorris@yahoo.com"
-}
-
-variable "traineeDisplayName" {
-    default = "C. Morris"
-}
-
 variable "trainerUserPrincipal" {
     default = "ibrahimozbekler@yahoo.com"
 }
 
 variable "trainerDisplayName" {
-    default = "I. Ozbekler"
+    default = "I-Ozbekler"
+}
+
+variable "traineeUserPrincipal" {
+    default = "codymorris@yahoo.com"
+}
+
+variable "traineeDisplayName" {
+    default = "C-Morris"
 }
 
 # Azure storage account variables
@@ -36,6 +36,10 @@ variable "storageAccountName" {
 
 variable "storageAccountTier" {
     default = "Standard"
+}
+
+variable "storageAccountReplicationType" {
+    default = "GRS"
 }
 
 # AWS Bucket Variables
@@ -49,12 +53,12 @@ variable "numberOfBuckets" {
 }
 
 # Vm variables
-variable "vmName" {
-    default = "staging-vm-01"
-}
-
 variable "vmSize" {
     default = "Standard_DS1_v2"
+}
+
+variable "vmName" {
+    default = "staging-vm-01"
 }
 
 variable "vm_osProfile_computerName" {

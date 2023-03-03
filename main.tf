@@ -7,8 +7,6 @@ resource "azurerm_resource_group" "RG01" {
   }
 }
 
-
-
 # Creates the trainer in azure and requires them to change password during the next login
 resource "azuread_user" "trainer" {
   user_principal_name = "${var.trainerUserPrincipal}"
@@ -16,14 +14,11 @@ resource "azuread_user" "trainer" {
   force_password_change = "true"
 }
 
-
 # Creates the trainee in azure
 resource "azuread_user" "trainee" {
   user_principal_name = "${var.traineeUserPrincipal}"
   display_name        = "${var.traineeDisplayName}"
 }
-
-
 
 # Creates the S3 buckets
 resource "aws_s3_bucket" "b" {
@@ -31,13 +26,11 @@ resource "aws_s3_bucket" "b" {
     count = var.numberOfBuckets
 }
 
-
 # Creates the four new aws users
 resource "aws_iam_user" "new-users" {
     for_each = toset(var.users)
     name = each.value
 }
-
 
 # Creates the azure storage account
 resource "azurerm_storage_account" "stg-acc" {
@@ -46,12 +39,10 @@ resource "azurerm_storage_account" "stg-acc" {
   location                 = azurerm_resource_group.RG01.location
   account_tier             = "Standard"
   account_replication_type = "GRS"
-
   tags = {
     environment = "staging"
   }
 }
-
 
 # Creates a linux virtual machine in Azure
 resource "azurerm_virtual_machine" "main" {
@@ -60,7 +51,6 @@ resource "azurerm_virtual_machine" "main" {
   resource_group_name   = azurerm_resource_group.RG01.name
   network_interface_ids = []
   vm_size               = "Standard_DS1_v2"
-
 
   storage_image_reference {
     publisher = "Canonical"
@@ -87,4 +77,3 @@ resource "azurerm_virtual_machine" "main" {
     source = "terraform"
   }
 }
-
