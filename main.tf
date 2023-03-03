@@ -20,16 +20,16 @@ resource "azuread_user" "trainee" {
   display_name        = "${var.traineeDisplayName}"
 }
 
-# Creates the S3 buckets
-resource "aws_s3_bucket" "b" {
-    bucket = "${var.s3BucketName}-${count.index}"
-    count = var.numberOfBuckets
-}
-
 # Creates the four new aws users
 resource "aws_iam_user" "new-users" {
     for_each = toset(var.users)
     name = each.value
+}
+
+# Creates the S3 buckets
+resource "aws_s3_bucket" "b" {
+    bucket = "${var.s3BucketName}-${count.index}"
+    count = var.numberOfBuckets
 }
 
 # Creates the azure storage account
@@ -46,11 +46,11 @@ resource "azurerm_storage_account" "stg-acc" {
 
 # Creates a linux virtual machine in Azure
 resource "azurerm_virtual_machine" "main" {
-  name                  = "staging-vm-01"
+  name                  = "${var.vmName}"
   location              = azurerm_resource_group.RG01.location
   resource_group_name   = azurerm_resource_group.RG01.name
   network_interface_ids = []
-  vm_size               = "Standard_DS1_v2"
+  vm_size               = "${var.vmSize}"
 
   storage_image_reference {
     publisher = "Canonical"
@@ -65,15 +65,14 @@ resource "azurerm_virtual_machine" "main" {
     managed_disk_type = "Standard_LRS"
   }
   os_profile {
-    computer_name  = "hostname"
-    admin_username = "testadmin"
-    admin_password = "Password1234!"
+    computer_name  = "${var.vm_osProfile_computerName}"
+    admin_username = "${var.vm_osProfile_adminUsername}"
+    admin_password = "${var.vm_osProfile_adminPassword}"
   }
   os_profile_linux_config {
     disable_password_authentication = false
   }
   tags = {
-    environment = "staging",
-    source = "terraform"
+    environment = "test"
   }
 }
