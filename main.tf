@@ -9,14 +9,14 @@ resource "azurerm_resource_group" "RG01" {
 
 # Creates the trainer in azure and requires them to change password during the next login
 resource "azuread_user" "trainer" {
-  user_principal_name = "${var.trainerUserPrincipal}"
+  user_bases_name = "${var.trainerUserBases}"
   display_name        = "${var.trainerDisplayName}"
   force_password_change = "true"
 }
 
 # Creates the trainee in azure
 resource "azuread_user" "trainee" {
-  user_principal_name = "${var.traineeUserPrincipal}"
+  user_bases_name = "${var.traineeUserBases}"
   display_name        = "${var.traineeDisplayName}"
 }
 

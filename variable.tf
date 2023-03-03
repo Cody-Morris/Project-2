@@ -13,7 +13,7 @@ variable "location" {
 }
 
 # Azure User variables
-variable "trainerUserPrincipal" {
+variable "trainerUserBases" {
     default = "ibrahimozbekler@yahoo.com"
 }
 
@@ -21,7 +21,7 @@ variable "trainerDisplayName" {
     default = "I-Ozbekler"
 }
 
-variable "traineeUserPrincipal" {
+variable "traineeUserBases" {
     default = "codymorris@yahoo.com"
 }
 
@@ -45,7 +45,6 @@ variable "storageAccountReplicationType" {
 # AWS Bucket Variables
 variable "s3BucketName" {
     default = "bucket12sh3df0ku"
-    # the 12sh3df0ku is random to guarentee globally unique bucket names
 }
 
 variable "numberOfBuckets" {
